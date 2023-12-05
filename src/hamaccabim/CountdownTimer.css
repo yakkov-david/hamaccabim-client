@@ -1,0 +1,27 @@
+
+
+/* CountdownTimer.css */
+.countdown-timer {
+    font-family: 'Arial', sans-serif;
+    /*color: white;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .time-section {
+    text-align: center;
+  }
+  
+  .time-value {
+    font-size: 3em;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .time-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
+  
