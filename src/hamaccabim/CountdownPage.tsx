@@ -4,6 +4,7 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
+import jackson from './images/Jackson.png';
 
 const CountdownPage: React.FC = () => {
     const eventDate = new Date('2023-12-14T22:00:00');
@@ -31,7 +32,7 @@ const CountdownPage: React.FC = () => {
                         Jackson Hinkle
                     </p>
                 </div>
-                <img src="https://www.figma.com/file/KnweM39a6TvLjZDQSs5Qbe/%D7%94%D7%9E%D7%9B%D7%91%D7%99%D7%9D?type=design&node-id=0-1&mode=design" alt="Event" />
+                <img src={jackson} alt="Event" />
                 <a href="https://twitter.com/jacksonhinklle" className="red-button">REPORT</a>
             </div>
             <div className="footer" dir='rtl'>
