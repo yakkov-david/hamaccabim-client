@@ -17,9 +17,22 @@
     text-align: center;
 }
 
+/* Style for the image */
+.img {
+  max-width: 50%; /* Reducing maximum width to 50% of its container */
+  width: 150px; /* Sets a fixed width; adjust as necessary */
+  height: auto; /* Height is set to auto to maintain aspect ratio */
+  display: block; /* Makes the image a block element */
+  margin: 0 auto; /* Centers the image horizontally in its container */
+}
+
+.p {
+  padding: 5px;
+}
+
 .footer {
     /* Style your footer here */
-    padding: 20px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -31,9 +44,6 @@
     align-items: center;
 }
 
-
-/* Existing styles for .countdown-timer and its children */
-/* ... */
 
 @media (max-width: 768px) {
     /* Adjust styles for mobile devices */

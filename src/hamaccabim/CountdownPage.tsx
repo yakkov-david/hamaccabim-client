@@ -12,10 +12,10 @@ const CountdownPage: React.FC = () => {
     return (
         <div className="countdown-page">
             <div className="header" dir="rtl">
-                <h1>המכבים - "מעטים מול רבים."</h1>
+                <h3>המכבים - "מעטים מול רבים."</h3>
             </div>
             <div className="main-content" dir='rtl'>
-                <p>
+                <p className='p'>
                     עם ישראל היקר,<br />
                     אנו עושים מאמצים רבים בהסברה ברשתות החברתיות<br />
                     לצערנו מכיון שאנו היהודים מיעוט זניח ביחס לעולם, קולנו בקושי נשמע ונבלע באוקיינוס האיסלאם<br />
@@ -32,7 +32,7 @@ const CountdownPage: React.FC = () => {
                         Jackson Hinkle
                     </p>
                 </div>
-                <img src={jackson} alt="Event" />
+                <img src={jackson} alt="Event" className='img' />
                 <a href="https://twitter.com/jacksonhinklle" className="red-button">REPORT</a>
             </div>
             <div className="footer" dir='rtl'>
