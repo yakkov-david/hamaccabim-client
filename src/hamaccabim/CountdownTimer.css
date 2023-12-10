@@ -1,29 +1,44 @@
-
-
-/* CountdownTimer.css */
 .countdown-timer {
-    font-family: 'Arial', sans-serif;
-    /*color: white;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .time-section {
-    text-align: center;
-  }
-  
-  .time-value {
-    font-size: 3em;
-    font-weight: bold;
-    display: block;
-  }
-  
-  .time-label {
-    font-size: 0.75em;
-    text-transform: uppercase;
-  }
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 
+.time-section {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  position: relative;
+}
 
-  
+.time-value {
+  font-size: 3em;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+}
+
+.time-label {
+  font-size: 0.75em;
+  display: block;
+}
+
+.time-colon {
+  font-size: 3em;
+  font-weight: bold;
+  position: absolute;
+  right: -12px;
+  top: 0.1em;
+}
+
+@media (max-width: 600px) {
+  .time-colon {
+    right: -15px;
+  }
+}
+
+.time-section:not(:last-child):after {
+  content: '';
+}

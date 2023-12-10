@@ -1,21 +1,16 @@
-
-// CountdownTimer.tsx
 import React, { useState, useEffect } from 'react';
 import './CountdownTimer.css';
 
-// Define the shape of the time left object
 interface TimeLeft {
     days: string;
     hours: string;
     minutes: string;
     seconds: string;
-} /*interface defining the shape of the object 
-    that holds the remaining time values*/
+}
 
-// Define the props expected by CountdownTimer component
 interface CountdownTimerProps {
     targetDate: Date;
-}//Looking forward to getting a Date accessory
+}
 
 const calculateTimeLeft = (targetDate: Date): TimeLeft => {
     const difference = +targetDate - +new Date();
@@ -45,28 +40,26 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
         const timer = setTimeout(() => {
             setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
-       
-        // Clear timeout if the component is unmounted
+
         return () => clearTimeout(timer);
-    }, [timeLeft]); // Added targetDate as a dependency
-    /*Defines the component as a functional component 
-        that accepts CountdownTimerProps as its props*/
-    
-    
-    
+    }, [timeLeft]);
+
     return (
         <div className="countdown-timer">
             <div className="time-section">
-                <span className="time-value">{timeLeft.days} : </span>
+                <span className="time-value">{timeLeft.days}</span>
                 <span className="time-label">days</span>
+                <span className="time-colon">:</span>
             </div>
             <div className="time-section">
-                <span className="time-value">{timeLeft.hours} : </span>
+                <span className="time-value">{timeLeft.hours}</span>
                 <span className="time-label">hours</span>
+                <span className="time-colon">:</span>
             </div>
             <div className="time-section">
-                <span className="time-value">{timeLeft.minutes} : </span>
+                <span className="time-value">{timeLeft.minutes}</span>
                 <span className="time-label">minutes</span>
+                <span className="time-colon">:</span>
             </div>
             <div className="time-section">
                 <span className="time-value">{timeLeft.seconds}</span>

@@ -1,18 +1,21 @@
 
 
 // CountdownPage.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
-import jackson from './images/Jackson.png';
+import people from './peopleData'; // import the people data
 
 const CountdownPage: React.FC = () => {
     const eventDate = new Date('2023-12-14T22:00:00');
+    const [currentPersonIndex, setCurrentPersonIndex] = useState(0); // State to track the current person
 
+    const currentPerson = people[currentPersonIndex]; // Get the current person's data
+    
     return (
         <div className="countdown-page">
             <div className="header" dir="rtl">
-                <h3>המכבים - "מעטים מול רבים."</h3>
+                <h2>המכבים - "מעטים מול רבים."</h2>
             </div>
             <div className="main-content" dir='rtl'>
                 <p className='p'>
@@ -29,11 +32,11 @@ const CountdownPage: React.FC = () => {
                     <p>
                         השבוע נתאחד כולנו ונחסום את החשבון טוויטר<br />
                         של צורר היהודים ושונא ישראל, הלא הוא:<br />
-                        Jackson Hinkle
+                        {currentPerson.name}
                     </p>
                 </div>
-                <img src={jackson} alt="Event" className='img' />
-                <a href="https://twitter.com/jacksonhinklle" className="red-button">REPORT</a>
+                <img src={currentPerson.imageUrl} alt="Event" className='img' />
+                <a href={currentPerson.twitterUrl} className="red-button">REPORT</a>
             </div>
             <div className="footer" dir='rtl'>
                 <p>
