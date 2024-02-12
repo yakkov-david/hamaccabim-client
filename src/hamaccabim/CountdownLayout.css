@@ -36,6 +36,7 @@
 .footer {
     /* Style your footer here */
     padding: 8px;
+    /*padding-bottom: 0;*/
     text-align: center;
 }
 
