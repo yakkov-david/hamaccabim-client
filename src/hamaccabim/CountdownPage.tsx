@@ -5,12 +5,13 @@ import React, { useState, useEffect } from 'react';
 import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
 import people from './peopleData'; // import the people data
-import { response } from 'express';
 import ResponseDialog from './ResponseDialog';
+
+
 
 const CountdownPage: React.FC = () => {
     //const eventDate = new Date('2023-12-20T22:00:00');
-    const [eventDate, setEventDate] = useState(new Date()); // Initialize with current date
+    const [eventDate, setEventDate] = useState(""); // Initialize with current date
 
     const [currentPersonIndex, setCurrentPersonIndex] = useState(0); // State to track the current person
 
@@ -18,13 +19,19 @@ const CountdownPage: React.FC = () => {
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
+
     useEffect(() => {
         // Fetch the countdown date when the component mounts
         const fetchCountdownDate = async () => {
+            const documentId = "65e9fd732ccc2772d1fcc85c"; // Document ID from your MongoDB
             try {
-                const response = await fetch('http://localhost:3030/lending-pages');
+                // Fetch the specific document from the 'landing-pages' service using the document ID
+                const response = await fetch(`http://localhost:3030/landing-pages/${documentId}`);
                 const data = await response.json();
-                setEventDate(new Date(data.date));
+                console.log("Fetched data:", data); // For debugging
+
+                setEventDate(data.CountdownDate);
+                console.log("Updated eventDate:", data.countdownDate); // For debugging
             } catch (error) {
                 console.error('Error fetching countdown date:', error);
             }
@@ -32,6 +39,10 @@ const CountdownPage: React.FC = () => {
 
         fetchCountdownDate();
     }, []);
+
+
+
+
 
 
     const handleReportClick = async () => {
@@ -46,7 +57,7 @@ const CountdownPage: React.FC = () => {
                 })
 
             });
-            //console.log('Making a request to', 'http://localhost:3030/ip');
+
 
             // Check if the response is okay and is of type JSON
             if (!response.ok) {
@@ -85,7 +96,7 @@ const CountdownPage: React.FC = () => {
                     עלינו להתאחד ולייצר כוח שאיתו נוכל לנצח
                 </p>
                 <div dir='ltr'>
-                    <CountdownTimer targetDate={eventDate} />
+                    <CountdownTimer targetDate={new Date(eventDate)} />
                     <hr className="horizontal-line" />
                 </div>
                 <div dir='rtl'>
