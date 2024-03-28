@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom'; // Import useParams
 const CountdownPage: React.FC = () => {
     const [eventDate, setEventDate] = useState(""); // Initialize with current date
     const [pageTitle, setPageTitle] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
     const [Paragraph1, setParagraph1] = useState<JSX.Element[]>([]);
     const [Paragraph2, setParagraph2] = useState<JSX.Element[]>([]);
     const [Paragraph3, setParagraph3] = useState<JSX.Element[]>([]);
@@ -33,6 +34,7 @@ const CountdownPage: React.FC = () => {
                     setParagraph1(convertNewLinesToJSX(data.Paragraph1));
                     setParagraph2(convertNewLinesToJSX(data.Paragraph2));
                     setParagraph3(convertNewLinesToJSX(data.Paragraph3));
+                    setImageUrl(data.ImageUrl);
                 } catch (error) {
                     console.error('Error fetching countdown date:', error);
                 }
@@ -100,7 +102,7 @@ const CountdownPage: React.FC = () => {
                     <hr className="horizontal-line" />
                 </div>
                 <p>{Paragraph2}</p>
-                <img src={currentPerson.imageUrl} alt="Event" className='img' />
+                {imageUrl && <img src={imageUrl} alt="Event" className='img' />}
                 <a href={currentPerson.twitterUrl} className="red-button" onClick={handleReportClick} target="_blank">REPORT</a>
                 {/* Response Dialog */}
                 <ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />
