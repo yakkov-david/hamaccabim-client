@@ -2,20 +2,21 @@
 //Login.tsx
 
 import React, { useState, useContext } from 'react';
-import { AuthContext } from './AuthContext';
+
+import { useNavigate } from 'react-router-dom';
+
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();  // Create an instance of the navigate function
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setAuthStatus } = useContext(AuthContext);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  
+
+  const handleSubmit = async () => {
 
     const text = 'hello';
-
-   
-
     // Send the credentials to the server
     try {
       const response = await fetch(`http://localhost:3030/admin-login`, {
@@ -29,7 +30,7 @@ const Login: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 'success') {
-          setAuthStatus(true);
+          navigate('/admin');
         } else {
           alert('Invalid credentials');
         }
@@ -43,7 +44,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <div>
         <label>Email</label>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -52,8 +53,8 @@ const Login: React.FC = () => {
         <label>Password</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
-      <button type="submit">Login</button>
-    </form>
+      <button onClick={() => handleSubmit()}>Login</button>
+    </div>
   );
 };
 
