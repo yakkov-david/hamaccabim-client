@@ -1,0 +1,68 @@
+/* Overall container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Use a softer gradient for the background */
+    background: linear-gradient(to right, #9c94dc 0%, #8ecdea 100%);
+  }
+  
+  /* Form styling */
+  .form {
+    padding: 40px; /* Increased padding for better spacing */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+  }
+  
+  .form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+    text-align: center; /* Center align the text */
+  }
+  
+  .form input {
+    width: calc(100% - 20px); /* Adjust width to consider padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-left: auto; /* Center the input fields */
+    margin-right: auto; /* Center the input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Button styling */
+  .button {
+    background-color: #4CAF50; /* Keep the button color */
+    color: white;
+    padding: 12px 20px;
+    margin: 8px auto; /* Center the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Adjust button width to fit the form width */
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Additional styles to adjust the position of the form elements */
+  .form div {
+    text-align: center; /* Center the form items */
+  }
+  
+  /* Adjust the heading if present in the markup */
+  .heading {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px; /* Provide spacing from the form */
+  }
+  

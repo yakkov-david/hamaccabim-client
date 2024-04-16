@@ -1,10 +1,11 @@
 
 //Login.tsx
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import './Login.css';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();  // Create an instance of the navigate function
@@ -30,6 +31,7 @@ const Login: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 'success') {
+          localStorage.setItem('token', data.token);
           navigate('/admin');
         } else {
           alert('Invalid credentials');
@@ -44,16 +46,18 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <button onClick={() => handleSubmit()}>Login</button>
+    <div className="login-container">
+      <form className="form" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+        <div>
+          <label>Email</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="submit" className="button">Login</button>
+      </form>
     </div>
   );
 };

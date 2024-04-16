@@ -17,7 +17,6 @@ interface FormState {
 
 const CreateEditLandingPage: React.FC = () => {
 
-
   // Set up state for form fields
   const [formState, setFormState] = useState<FormState>({
     countdownDate: '',
@@ -107,6 +106,7 @@ const CreateEditLandingPage: React.FC = () => {
         console.error('Error uploading image:', error);
       }
     }
+
   };
 
 
