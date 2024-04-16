@@ -2,7 +2,7 @@
 //Login.tsx
 
 import React, { useState } from 'react';
-
+import config from '../config';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
@@ -13,14 +13,14 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  
+
 
   const handleSubmit = async () => {
 
     const text = 'hello';
     // Send the credentials to the server
     try {
-      const response = await fetch(`http://localhost:3030/admin-login`, {
+      const response = await fetch(config.apiUrl + '/admin-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

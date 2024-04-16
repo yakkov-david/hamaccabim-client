@@ -2,6 +2,7 @@
 //CreateEditLandingPage.tsx
 
 import React, { useState, useRef } from 'react';
+import config from '../config';
 
 import './CreateEditLandingPage.css';
 
@@ -39,11 +40,11 @@ const CreateEditLandingPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState("");
 
   const imageInputRef = useRef<HTMLInputElement>(null);
-
+/*
   // Function to trigger file input click
   const handleImageInputClick = () => {
     imageInputRef.current?.click();
-  };
+  };*/
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -68,7 +69,7 @@ const CreateEditLandingPage: React.FC = () => {
       imageData.append('file', imageInputRef.current.files[0]);
 
       try {
-        const imageUploadResponse = await fetch('http://localhost:3030/upload-image', {
+        const imageUploadResponse = await fetch(config.apiUrl + '/upload-image', {
           method: 'POST',
           body: imageData,
         });
@@ -87,7 +88,7 @@ const CreateEditLandingPage: React.FC = () => {
         });
 
         // The rest of your original fetch call remains the same
-        fetch('http://localhost:3030/landing-pages', {
+        fetch(config.apiUrl + '/landing-pages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ const CreateEditLandingPage: React.FC = () => {
       </label>
       <label>
         Image Upload
-        <div className="file-input-container" onClick={handleImageInputClick}>
+        <div className="file-input-container" >
           <div className="custom-file-button">Select Image</div>
           <input
             type="file"

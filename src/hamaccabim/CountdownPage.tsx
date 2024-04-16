@@ -1,5 +1,6 @@
 // CountdownPage.tsx
 import React, { useState, useEffect } from 'react';
+import config from '../config';
 import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
 import people from './peopleData'; // import the people data
@@ -26,7 +27,7 @@ const CountdownPage: React.FC = () => {
         const fetchCountdownDate = async () => {
             if (documentId) {
                 try {
-                    const response = await fetch(`http://localhost:3030/landing-pages/${documentId}`);
+                    const response = await fetch(config.apiUrl + `/landing-pages/${documentId}`);
                     const data = await response.json();
 
                     setEventDate(data.CountdownDate);
@@ -46,14 +47,14 @@ const CountdownPage: React.FC = () => {
 
     // Utility function to convert new lines to JSX
     const convertNewLinesToJSX = (text: string): JSX.Element[] => {
-      return text.split('\n').map((line, index, array) => (
-        index === array.length - 1 ? <React.Fragment key={index}>{line}</React.Fragment> : <React.Fragment key={index}>{line}<br /></React.Fragment>
-      ));
+        return text.split('\n').map((line, index, array) => (
+            index === array.length - 1 ? <React.Fragment key={index}>{line}</React.Fragment> : <React.Fragment key={index}>{line}<br /></React.Fragment>
+        ));
     };
 
     const handleReportClick = async () => {
         try {
-            const response = await fetch('http://localhost:3030/ip', {
+            const response = await fetch(config.apiUrl + '/ip', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ const CountdownPage: React.FC = () => {
                     text: "Report content or any relevant information"
                 })
             });
-    
+
             // Check if the response is okay and is of type JSON
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -70,21 +71,21 @@ const CountdownPage: React.FC = () => {
                 const responseBody = await response.text();
                 throw new Error(`Expected JSON but received: ${responseBody}`);
             }
-    
+
             const data = await response.json();
             console.log('Report successful:', data);
             // Optionally, handle the response data (e.g., show a success message)
-    
+
         } catch (error) {
             console.error('Error reporting:', error);
             // Optionally, handle the error (e.g., show an error message)
         }
-    
+
         // Open the dialog to show feedback about the report action.
         // This could be adjusted based on successful or error outcomes.
         setDialogOpen(true);
     };
-    
+
 
     const handleCloseDialog = () => {
         setDialogOpen(false);
