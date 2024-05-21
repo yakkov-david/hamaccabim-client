@@ -17,15 +17,14 @@ const Login: React.FC = () => {
 
   const handleSubmit = async () => {
 
-    const text = 'hello';
     // Send the credentials to the server
     try {
-      const response = await fetch(config.apiUrl + '/admin-login', {
+      const response = await fetch(config.apiUrl + '/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, text }),
+        body: JSON.stringify({ email, password, action: 'login' }),
       });
 
       if (response.ok) {
@@ -46,17 +45,32 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
-      <form className="form" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+    <div
+      className="login-container">
+      <form
+        className="form"
+        onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
         <div>
           <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
           <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <button type="submit" className="button">Login</button>
+        <button
+          type="submit"
+          className="button">
+          Login
+        </button>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@
 //CreateEditLandingPage.tsx
 
 import React, { useState, useRef } from 'react';
+//import { Link } from 'react-router-dom';
 import config from '../config';
 
 import './CreateEditLandingPage.css';
@@ -40,11 +41,11 @@ const CreateEditLandingPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState("");
 
   const imageInputRef = useRef<HTMLInputElement>(null);
-/*
-  // Function to trigger file input click
-  const handleImageInputClick = () => {
-    imageInputRef.current?.click();
-  };*/
+  /*
+    // Function to trigger file input click
+    const handleImageInputClick = () => {
+      imageInputRef.current?.click();
+    };*/
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -78,7 +79,6 @@ const CreateEditLandingPage: React.FC = () => {
 
         // Now include imageUrl in the original POST request
         const body = JSON.stringify({
-          text: '',
           CountdownDate: formState.countdownDate,
           Title: formState.title,
           Paragraph1: formState.paragraph1,
@@ -114,22 +114,41 @@ const CreateEditLandingPage: React.FC = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}>
       <label>
         Countdown Date
-        <input type="datetime-local" name="countdownDate" value={formState.countdownDate} onChange={handleChange} />
+        <input
+          type="datetime-local"
+          name="countdownDate"
+          value={formState.countdownDate}
+          onChange={handleChange}
+        />
       </label>
       <label>
         Title
-        <input type="text" name="title" value={formState.title} onChange={handleChange} />
+        <input
+          type="text"
+          name="title"
+          value={formState.title}
+          onChange={handleChange}
+        />
       </label>
       <label>
         Paragraph 1
-        <textarea name="paragraph1" value={formState.paragraph1} onChange={handleChange} />
+        <textarea
+          name="paragraph1"
+          value={formState.paragraph1}
+          onChange={handleChange}
+        />
       </label>
       <label>
         Paragraph 2
-        <textarea name="paragraph2" value={formState.paragraph2} onChange={handleChange} />
+        <textarea
+          name="paragraph2"
+          value={formState.paragraph2}
+          onChange={handleChange}
+        />
       </label>
       <label>
         Image Upload
@@ -140,15 +159,29 @@ const CreateEditLandingPage: React.FC = () => {
             ref={imageInputRef}
             accept="image/*"
             className="file-input"
-            onChange={handleFileChange} />
+            onChange={handleFileChange}
+          />
         </div>
       </label>
-      {selectedImage && <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%', height: 'auto' }} />}
+      {selectedImage &&
+        <img
+          src={selectedImage}
+          alt="Selected"
+          style={{ maxWidth: '100%', height: 'auto' }}
+        />
+      }
       <label>
         Paragraph 3
-        <textarea name="paragraph3" value={formState.paragraph3} onChange={handleChange} />
+        <textarea
+          name="paragraph3"
+          value={formState.paragraph3}
+          onChange={handleChange}
+        />
       </label>
-      <button type="submit">Save</button>
+      <button
+        type="submit">
+        Save
+      </button>
     </form>
   );
 };

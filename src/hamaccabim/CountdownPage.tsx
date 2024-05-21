@@ -92,24 +92,61 @@ const CountdownPage: React.FC = () => {
     };
 
     return (
-        <div className="countdown-page">
-            <div className="header" dir="rtl">
-                <div>{pageTitle}</div>
-            </div>
-            <div className="main-content" dir='rtl'>
-                <p className='p'>{Paragraph1}</p>
-                <div dir='ltr'>
-                    <CountdownTimer targetDate={new Date(eventDate)} />
-                    <hr className="horizontal-line" />
+        <div
+            className="countdown-page">
+            <div
+                className="header"
+                dir="rtl">
+                <div>
+                    {pageTitle}
                 </div>
-                <p>{Paragraph2}</p>
-                {imageUrl && <img src={imageUrl} alt="Event" className='img' />}
-                <a href={currentPerson.twitterUrl} className="red-button" onClick={handleReportClick} target="_blank">REPORT</a>
-                {/* Response Dialog */}
-                <ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />
-                <p>{Paragraph3}</p>
             </div>
-            <div className="footer" dir='rtl'></div>
+            <div
+                className="main-content"
+                dir='rtl'>
+                <p
+                    className='p'>
+                    {Paragraph1}
+                </p>
+                <div
+                    dir='ltr'>
+                    <CountdownTimer
+                        targetDate={new Date(eventDate)}
+                    />
+                    <hr
+                        className="horizontal-line"
+                    />
+                </div>
+                <p>
+                    {Paragraph2}
+                </p>
+                {imageUrl &&
+                    <img
+                        src={imageUrl}
+                        alt="Event"
+                        className='img'
+                    />
+                }
+                <a
+                    href={currentPerson.twitterUrl}
+                    className="red-button"
+                    onClick={handleReportClick}
+                    target="_blank">
+                    REPORT
+                </a>
+                {/* Response Dialog */}
+                <ResponseDialog
+                    open={dialogOpen}
+                    onClose={handleCloseDialog}
+                />
+                <p>
+                    {Paragraph3}
+                </p>
+            </div>
+            <div className="footer"
+                dir='rtl'>
+
+            </div>
         </div>
     );
 };
