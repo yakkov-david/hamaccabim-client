@@ -3,20 +3,16 @@
 
 import React, { useState } from 'react';
 import config from '../config';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();  // Create an instance of the navigate function
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
-
   const handleSubmit = async () => {
-
     // Send the credentials to the server
     try {
       const response = await fetch(config.apiUrl + '/users', {
@@ -31,7 +27,7 @@ const Login: React.FC = () => {
         const data = await response.json();
         if (data.status === 'success') {
           localStorage.setItem('token', data.token);
-          navigate('/admin');
+          navigate('/AdminWelcome');
         } else {
           alert('Invalid credentials');
         }
@@ -45,8 +41,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div
-      className="login-container">
+    <div className="login-container">
       <form
         className="form"
         onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
@@ -71,9 +66,15 @@ const Login: React.FC = () => {
           className="button">
           Login
         </button>
+        <div>
+          <Link to="/ForgotPassword" className="forgot-password-link">
+            Forgot your password?
+          </Link>
+        </div>
       </form>
     </div>
   );
 };
 
 export default Login;
+

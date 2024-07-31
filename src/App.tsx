@@ -4,6 +4,12 @@ import CountdownPage from './hamaccabim/CountdownPage';
 import CreateEditLandingPage from './hamaccabim/CreateEditLandingPage';
 import Login from './hamaccabim/Login';
 import ManagerForm from './hamaccabim/ManagerRegistration';
+import ForgotPassword from './hamaccabim/ForgotPassword';
+import ResetPassword from './hamaccabim/ResetPassword';
+import AnalyticsPage from './hamaccabim/AnalyticsPage';
+import AdminWelcome from './hamaccabim/AdminWelcome';
+import UsersTable from './hamaccabim/UsersTable';
+import LandingPagesTable from './hamaccabim/LandingPagesTable';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -76,14 +82,50 @@ const App: React.FC = () => {
             path="/admin"
             element={
               <GuardedRoute>
-                {/*<CreateEditLandingPage />*/}
-                <ManagerForm />
+                <CreateEditLandingPage />
+                {/*<ManagerForm />*/}
               </GuardedRoute>
             }
           />
           <Route
             path="/login"
             element={<Login />}
+          />
+          <Route
+            path="/ForgotPassword"
+            element={<ForgotPassword />}
+          />
+          <Route
+            path="/ResetPassword"
+            element={<ResetPassword />}
+          />
+          <Route
+            path="/AnalyticsPage"
+            element={<AnalyticsPage />}
+          />
+
+          <Route
+            path="/AdminWelcome"
+            element={<AdminWelcome />}
+          />
+
+          <Route
+            path="/ManagerForm"
+            element={<ManagerForm />}
+          />
+
+
+
+
+          <Route
+            path="/UsersTable"
+            element={<UsersTable />}
+          />
+
+
+          <Route
+            path="/LandingPagesTable"
+            element={<LandingPagesTable />}
           />
 
 

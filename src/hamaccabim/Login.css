@@ -66,3 +66,15 @@
     margin-bottom: 30px; /* Provide spacing from the form */
   }
   
+  .forgot-password-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .forgot-password-link:hover {
+    text-decoration: underline;
+  }
+  
