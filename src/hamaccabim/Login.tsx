@@ -1,6 +1,3 @@
-
-//Login.tsx
-
 import React, { useState } from 'react';
 import config from '../config';
 import { useNavigate, Link } from 'react-router-dom';
@@ -15,24 +12,30 @@ const Login: React.FC = () => {
   const handleSubmit = async () => {
     // Send the credentials to the server
     try {
-      const response = await fetch(config.apiUrl + '/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password, action: 'login' }),
-      });
+      if (config.apiKey) { // Ensure the API key is defined
+        const headers = new Headers();
+        headers.set('Content-Type', 'application/json');
+        headers.set('x-api-key', config.apiKey);
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.status === 'success') {
-          localStorage.setItem('token', data.token);
-          navigate('/AdminWelcome');
+        const response = await fetch(config.apiUrl + '/users', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ email, password, action: 'login' }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status === 'success') {
+            localStorage.setItem('token', data.token);
+            navigate('/AdminWelcome');
+          } else {
+            alert('Invalid credentials');
+          }
         } else {
-          alert('Invalid credentials');
+          throw new Error('Failed to authenticate');
         }
       } else {
-        throw new Error('Failed to authenticate');
+        throw new Error('API key is missing');
       }
     } catch (error) {
       console.error('Authentication error:', error);
@@ -77,4 +80,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-

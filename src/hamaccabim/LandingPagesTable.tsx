@@ -19,25 +19,25 @@ interface LandingPages {
 const columns: GridColDef[] = [
     { field: 'CountdownDate', headerName: 'CountdownDate', width: 200 },
     { field: 'title', headerName: 'Title', width: 200 },
-    { 
-        field: 'paragraph1', 
-        headerName: 'Paragraph1', 
+    {
+        field: 'paragraph1',
+        headerName: 'Paragraph1',
         width: 200,
         renderCell: (params) => (
             <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
         ),
     },
-    { 
-        field: 'paragraph2', 
-        headerName: 'Paragraph2', 
+    {
+        field: 'paragraph2',
+        headerName: 'Paragraph2',
         width: 200,
         renderCell: (params) => (
             <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
         ),
     },
-    { 
-        field: 'paragraph3', 
-        headerName: 'Paragraph3', 
+    {
+        field: 'paragraph3',
+        headerName: 'Paragraph3',
         width: 200,
         renderCell: (params) => (
             <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
@@ -71,10 +71,25 @@ export default function LandingPagesTable() {
     const imageInputRef = React.useRef<HTMLInputElement>(null);
 
     React.useEffect(() => {
-        fetch(config.apiUrl + `/landing-pages`)
-            .then((response) => response.json())
-            .then((data: LandingPages[]) => setRows(data))
-            .catch((error) => console.error('Error fetching data:', error));
+        const fetchData = async () => {
+            try {
+                const headers = new Headers();
+                headers.set('Content-Type', 'application/json');
+                if (config.apiKey) {
+                    headers.set('x-api-key', config.apiKey);
+                }
+
+                const response = await fetch(config.apiUrl + `/landing-pages`, {
+                    headers: headers,
+                });
+                const data = await response.json();
+                setRows(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const handleClickOpen = () => {
@@ -117,8 +132,14 @@ export default function LandingPagesTable() {
             imageData.append('file', imageInputRef.current.files[0]);
 
             try {
+                const headers = new Headers();
+                if (config.apiKey) {
+                    headers.set('x-api-key', config.apiKey);
+                }
+
                 const imageUploadResponse = await fetch(config.apiUrl + '/upload-image', {
                     method: 'POST',
+                    headers: headers,
                     body: imageData,
                 });
                 const imageUploadData = await imageUploadResponse.json();
@@ -133,29 +154,36 @@ export default function LandingPagesTable() {
             ImageUrl: imageUrl,
         };
 
-        const url = editMode ? `${config.apiUrl}/landing-pages/${selectedId}` : `${config.apiUrl}/landing-pages`;
-        const method = editMode ? 'PUT' : 'POST';
+        try {
+            const headers = new Headers();
+            headers.set('Content-Type', 'application/json');
+            if (config.apiKey) {
+                headers.set('x-api-key', config.apiKey);
+            }
 
-        fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
-            .then((response) => response.json())
-            .then((data: LandingPages) => {
-                if (editMode) {
-                    setRows((prevRows) => prevRows.map((row) => {
-                        const id = typeof row._id === 'object' ? row._id.$oid : row._id;
-                        return id === selectedId ? data : row;
-                    }));
-                } else {
-                    setRows((prevRows) => [...prevRows, data]);
-                }
-                handleClose();
-            })
-            .catch((error) => console.error(`Error ${editMode ? 'updating' : 'registering'} LandingPage:`, error));
+            const url = editMode ? `${config.apiUrl}/landing-pages/${selectedId}` : `${config.apiUrl}/landing-pages`;
+            const method = editMode ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method: method,
+                headers: headers,
+                body: JSON.stringify(requestData),
+            });
+            const data: LandingPages = await response.json();
+
+            if (editMode) {
+                setRows((prevRows) => prevRows.map((row) => {
+                    const id = typeof row._id === 'object' ? row._id.$oid : row._id;
+                    return id === selectedId ? data : row;
+                }));
+            } else {
+                setRows((prevRows) => [...prevRows, data]);
+            }
+
+            handleClose();
+        } catch (error) {
+            console.error(`Error ${editMode ? 'updating' : 'registering'} LandingPage:`, error);
+        }
     };
 
     const handleRowDoubleClick = (params: GridRowParams) => {
@@ -190,6 +218,10 @@ export default function LandingPagesTable() {
             const deleteRequests = selectedIds.map((id) =>
                 fetch(`${config.apiUrl}/landing-pages/${id}`, {
                     method: 'DELETE',
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'x-api-key': config.apiKey || '',
+                    }),
                 })
             );
 
@@ -254,7 +286,7 @@ export default function LandingPagesTable() {
                     <TextField
                         margin="dense"
                         name="title"
-                        label="title"
+                        label="Title"
                         type="text"
                         fullWidth
                         variant="outlined"
@@ -264,7 +296,7 @@ export default function LandingPagesTable() {
                     <TextField
                         margin="dense"
                         name="paragraph1"
-                        label="paragraph1"
+                        label="Paragraph1"
                         type="text"
                         fullWidth
                         multiline
@@ -275,7 +307,7 @@ export default function LandingPagesTable() {
                     <TextField
                         margin="dense"
                         name="paragraph2"
-                        label="paragraph2"
+                        label="Paragraph2"
                         type="text"
                         fullWidth
                         multiline
@@ -286,7 +318,7 @@ export default function LandingPagesTable() {
                     <TextField
                         margin="dense"
                         name="paragraph3"
-                        label="paragraph3"
+                        label="Paragraph3"
                         type="text"
                         fullWidth
                         multiline

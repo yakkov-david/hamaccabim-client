@@ -1,6 +1,3 @@
-
-//ResetPassword.tsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -21,22 +18,26 @@ const ResetPassword: React.FC = () => {
     e.preventDefault();
     try {
       const token = query.get('token');
-      //console.log(token);
-
 
       if (!token) {
         setMessage('Invalid token');
         return;
       }
-      const response = await axios.post(config.apiUrl + '/users', { token, newPassword, action: 'resetPassword' });
 
-      /*const response = await fetch(config.apiUrl + '/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token, newPassword, action: 'resetPassword' }),
-      });*/
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+
+      // Add API key to the headers if it's defined
+      if (config.apiKey) {
+        headers['x-api-key'] = config.apiKey;
+      }
+
+      const response = await axios.post(
+        config.apiUrl + '/users',
+        { token, newPassword, action: 'resetPassword' },
+        { headers }
+      );
 
       setMessage(response.data.message);
       setTimeout(() => {
@@ -44,6 +45,7 @@ const ResetPassword: React.FC = () => {
       }, 2000);
     } catch (error) {
       setMessage('An error occurred');
+      console.error('Error resetting password:', error);
     }
   };
 

@@ -3,7 +3,6 @@ import './App.css';
 import CountdownPage from './hamaccabim/CountdownPage';
 import CreateEditLandingPage from './hamaccabim/CreateEditLandingPage';
 import Login from './hamaccabim/Login';
-import ManagerForm from './hamaccabim/ManagerRegistration';
 import ForgotPassword from './hamaccabim/ForgotPassword';
 import ResetPassword from './hamaccabim/ResetPassword';
 import AnalyticsPage from './hamaccabim/AnalyticsPage';
@@ -13,6 +12,7 @@ import LandingPagesTable from './hamaccabim/LandingPagesTable';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+
 
 
 interface DecodedToken {
@@ -69,6 +69,9 @@ const App: React.FC = () => {
             </li>
           </ul>
         </nav>
+
+
+
         <Routes>
           <Route
             path="/"
@@ -81,10 +84,9 @@ const App: React.FC = () => {
           <Route
             path="/admin"
             element={
-              <GuardedRoute>
-                <CreateEditLandingPage />
-                {/*<ManagerForm />*/}
-              </GuardedRoute>
+
+              <CreateEditLandingPage />
+
             }
           />
           <Route
@@ -93,46 +95,49 @@ const App: React.FC = () => {
           />
           <Route
             path="/ForgotPassword"
-            element={<ForgotPassword />}
+            element={
+              <ForgotPassword />
+            }
           />
           <Route
             path="/ResetPassword"
-            element={<ResetPassword />}
+            element={
+              <ResetPassword />
+            }
           />
           <Route
             path="/AnalyticsPage"
-            element={<AnalyticsPage />}
+            element={
+              <GuardedRoute>
+                <AnalyticsPage />
+              </GuardedRoute>
+            }
           />
-
           <Route
             path="/AdminWelcome"
-            element={<AdminWelcome />}
+            element={
+              <GuardedRoute>
+                <AdminWelcome />
+              </GuardedRoute>
+            }
           />
-
-          <Route
-            path="/ManagerForm"
-            element={<ManagerForm />}
-          />
-
-
-
-
           <Route
             path="/UsersTable"
-            element={<UsersTable />}
+            element={
+              <GuardedRoute>
+                <UsersTable />
+              </GuardedRoute>
+            }
           />
-
-
           <Route
             path="/LandingPagesTable"
-            element={<LandingPagesTable />}
+            element={
+              <GuardedRoute>
+                <LandingPagesTable />
+              </GuardedRoute>
+            }
           />
 
-
-          {/*<Route
-            path="/ManagerForm"
-            element={<ManagerForm />}
-          />*/}
 
           {/*<Route
             path="/edit-user"

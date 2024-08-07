@@ -23,25 +23,42 @@ const AnalyticsPage: React.FC = () => {
     const [graphData, setGraphData] = useState<GraphData[]>([]);
 
     useEffect(() => {
-        fetch(config.apiUrl + '/analytics')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Fetched data:', data);
-                if (data) {
-                    const eventData = data;  // Assuming the response itself is an array
-                    const visitCount = eventData.filter((item: AnalyticsData) => item.event === 'visit').length;
-                    const clickCount = eventData.filter((item: AnalyticsData) => item.event === 'click').length;
-                    setVisits(visitCount);
-                    setClicks(clickCount);
+        const fetchAnalyticsData = async () => {
+            try {
+                if (config.apiKey) { // Ensure the API key is defined
+                    const headers = new Headers();
+                    headers.set('Content-Type', 'application/json');
+                    headers.set('x-api-key', config.apiKey);
 
-                    processGraphData(eventData);
+                    const response = await fetch(config.apiUrl + '/analytics', {
+                        headers: headers,
+                    });
+
+                    if (response.ok) {
+                        const data: AnalyticsData[] = await response.json();
+                        console.log('Fetched data:', data);
+                        if (data) {
+                            const visitCount = data.filter(item => item.event === 'visit').length;
+                            const clickCount = data.filter(item => item.event === 'click').length;
+                            setVisits(visitCount);
+                            setClicks(clickCount);
+
+                            processGraphData(data);
+                        } else {
+                            console.error('Data is undefined:', data);
+                        }
+                    } else {
+                        throw new Error('Failed to fetch analytics data');
+                    }
                 } else {
-                    console.error('Data is undefined:', data);
+                    throw new Error('API key is missing');
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching analytics data:', error);
-            });
+            }
+        };
+
+        fetchAnalyticsData();
     }, []);
 
     const processGraphData = (data: AnalyticsData[]) => {

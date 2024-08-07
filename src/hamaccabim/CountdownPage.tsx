@@ -26,15 +26,28 @@ const CountdownPage: React.FC = () => {
         const fetchCountdownDate = async () => {
             if (documentId) {
                 try {
-                    const response = await fetch(config.apiUrl + `/landing-pages/${documentId}`);
-                    const data = await response.json();
+                    const headers = new Headers();
+                    headers.set('Content-Type', 'application/json');
+                    if (config.apiKey) {
+                        headers.set('x-api-key', config.apiKey);
+                    }
 
-                    setEventDate(data.CountdownDate);
-                    setPageTitle(data.Title);
-                    setParagraph1(convertNewLinesToJSX(data.Paragraph1));
-                    setParagraph2(convertNewLinesToJSX(data.Paragraph2));
-                    setParagraph3(convertNewLinesToJSX(data.Paragraph3));
-                    setImageUrl(data.ImageUrl);
+                    const response = await fetch(config.apiUrl + `/landing-pages/${documentId}`, {
+                        headers: headers,
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        setEventDate(data.CountdownDate);
+                        setPageTitle(data.Title);
+                        setParagraph1(convertNewLinesToJSX(data.Paragraph1));
+                        setParagraph2(convertNewLinesToJSX(data.Paragraph2));
+                        setParagraph3(convertNewLinesToJSX(data.Paragraph3));
+                        setImageUrl(data.ImageUrl);
+                    } else {
+                        throw new Error('Failed to fetch countdown date');
+                    }
                 } catch (error) {
                     console.error('Error fetching countdown date:', error);
                 }
@@ -47,14 +60,17 @@ const CountdownPage: React.FC = () => {
         reportVisit();
     }, []);
 
-
     const reportVisit = async () => {
         try {
+            const headers = new Headers();
+            headers.set('Content-Type', 'application/json');
+            if (config.apiKey) {
+                headers.set('x-api-key', config.apiKey);
+            }
+
             await fetch(config.apiUrl + '/analytics', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
                     event: 'visit',
                     timestamp: new Date().toISOString(),
@@ -65,7 +81,6 @@ const CountdownPage: React.FC = () => {
         }
     };
 
-
     const convertNewLinesToJSX = (text: string): JSX.Element[] => {
         return text.split('\n').map((line, index, array) => (
             index === array.length - 1 ? <React.Fragment key={index}>{line}</React.Fragment> : <React.Fragment key={index}>{line}<br /></React.Fragment>
@@ -74,11 +89,15 @@ const CountdownPage: React.FC = () => {
 
     const handleReportClick = async () => {
         try {
+            const headers = new Headers();
+            headers.set('Content-Type', 'application/json');
+            if (config.apiKey) {
+                headers.set('x-api-key', config.apiKey);
+            }
+
             const response = await fetch(config.apiUrl + '/ip', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
                     text: "Report content or any relevant information"
                 })
@@ -96,9 +115,7 @@ const CountdownPage: React.FC = () => {
 
             await fetch(config.apiUrl + '/analytics', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
                     event: 'click',
                     timestamp: new Date().toISOString()

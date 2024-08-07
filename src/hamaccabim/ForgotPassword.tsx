@@ -10,11 +10,16 @@ const ForgotPassword: React.FC = () => {
     e.preventDefault();
     try {
       console.log('Sending email:', email); // Log email being sent
+
+      const headers = new Headers();
+      headers.set('Content-Type', 'application/json');
+      if (config.apiKey) {
+        headers.set('x-api-key', config.apiKey);
+      }
+
       const response = await fetch(config.apiUrl + '/users', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         body: JSON.stringify({ email, action: 'forgotPassword' }),
       });
 

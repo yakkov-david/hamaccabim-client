@@ -17,6 +17,19 @@ interface User {
     action: string;
 }
 
+// Create a custom fetch function that includes the API key in the headers
+const fetchWithApiKey = (url: string, options: RequestInit = {}) => {
+    const headers = new Headers(options.headers);
+
+    headers.set('Content-Type', 'application/json');
+    if (config.apiKey) {
+        headers.set('x-api-key', config.apiKey);
+    }
+
+    return fetch(url, { ...options, headers });
+};
+
+
 const columns: GridColDef[] = [
     { field: 'email', headerName: 'Email', width: 200 },
     { field: 'name', headerName: 'Name', width: 130 },
@@ -42,7 +55,7 @@ export default function UsersTable() {
     const [showNewPassword, setShowNewPassword] = React.useState(false);
 
     React.useEffect(() => {
-        fetch(config.apiUrl + `/users`)
+        fetchWithApiKey(config.apiUrl + `/users`)
             .then((response) => response.json())
             .then((data: User[]) => setRows(data))
             .catch((error) => console.error('Error fetching data:', error));
@@ -79,7 +92,7 @@ export default function UsersTable() {
         const url = editMode ? `${config.apiUrl}/users/${selectedId}` : `${config.apiUrl}/users`;
         const method = editMode ? 'PUT' : 'POST';
 
-        fetch(url, {
+        fetchWithApiKey(url, {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
@@ -109,7 +122,7 @@ export default function UsersTable() {
         });
 
         if (rowData) {
-            fetch(`${config.apiUrl}/users/${params.id}`)
+            fetchWithApiKey(`${config.apiUrl}/users/${params.id}`)
                 .then((response) => response.json())
                 .then((data: User) => {
                     setFormData({
@@ -135,7 +148,7 @@ export default function UsersTable() {
     const handleDelete = () => {
         if (selectedIds.length > 0) {
             const deleteRequests = selectedIds.map((id) =>
-                fetch(`${config.apiUrl}/users/${id}`, {
+                fetchWithApiKey(`${config.apiUrl}/users/${id}`, {
                     method: 'DELETE',
                 })
             );
@@ -174,7 +187,7 @@ export default function UsersTable() {
     };
 
     const handleResetPasswordSubmit = () => {
-        fetch(`${config.apiUrl}/users/${selectedId}`)
+        fetchWithApiKey(`${config.apiUrl}/users/${selectedId}`)
             .then((response) => response.json())
             .then((data: User) => {
                 const requestData = {
@@ -185,7 +198,7 @@ export default function UsersTable() {
                     action: 'register', // This ensures the password hashing logic is applied on the server
                 };
 
-                fetch(`${config.apiUrl}/users/${selectedId}`, {
+                fetchWithApiKey(`${config.apiUrl}/users/${selectedId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
