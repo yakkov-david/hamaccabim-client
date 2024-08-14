@@ -42,7 +42,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
         }, 1000);
 
         return () => clearTimeout(timer);
-    }, [timeLeft]);
+    }, [targetDate]);
 
     return (
         <div className="countdown-timer">

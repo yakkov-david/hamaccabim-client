@@ -156,6 +156,7 @@ const CountdownPage: React.FC = () => {
                     className="red-button"
                     onClick={handleReportClick}
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     REPORT
                 </a>
