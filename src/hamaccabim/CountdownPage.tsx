@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import config from '../config';
 import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
-import people from './peopleData';
 import ResponseDialog from './ResponseDialog';
-
 import { useParams } from 'react-router-dom';
 
 const CountdownPage: React.FC = () => {
@@ -14,16 +12,15 @@ const CountdownPage: React.FC = () => {
     const [Paragraph1, setParagraph1] = useState<JSX.Element[]>([]);
     const [Paragraph2, setParagraph2] = useState<JSX.Element[]>([]);
     const [Paragraph3, setParagraph3] = useState<JSX.Element[]>([]);
-
-    const [currentPersonIndex, setCurrentPersonIndex] = useState(0);
-    const currentPerson = people[currentPersonIndex];
+    const [name, setName] = useState(""); // New state for name
+    const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const { documentId } = useParams<{ documentId: string }>();
 
     useEffect(() => {
-        const fetchCountdownDate = async () => {
+        const fetchCountdownData = async () => {
             if (documentId) {
                 try {
                     const headers = new Headers();
@@ -38,22 +35,25 @@ const CountdownPage: React.FC = () => {
 
                     if (response.ok) {
                         const data = await response.json();
+                        console.log("Fetched data:", data);  // Debugging log
 
                         setEventDate(data.CountdownDate);
-                        setPageTitle(data.Title);
-                        setParagraph1(convertNewLinesToJSX(data.Paragraph1));
-                        setParagraph2(convertNewLinesToJSX(data.Paragraph2));
-                        setParagraph3(convertNewLinesToJSX(data.Paragraph3));
+                        setPageTitle(data.title);
+                        setParagraph1(convertNewLinesToJSX(data.paragraph1));
+                        setParagraph2(convertNewLinesToJSX(data.paragraph2));
+                        setParagraph3(convertNewLinesToJSX(data.paragraph3));
                         setImageUrl(data.ImageUrl);
+                        setName(data.name);
+                        setTwitterLink(data.twitterLink);
                     } else {
-                        throw new Error('Failed to fetch countdown date');
+                        throw new Error('Failed to fetch countdown data');
                     }
                 } catch (error) {
-                    console.error('Error fetching countdown date:', error);
+                    console.error('Error fetching countdown data:', error);
                 }
             }
         };
-        fetchCountdownDate();
+        fetchCountdownData();
     }, [documentId]);
 
     useEffect(() => {
@@ -81,11 +81,15 @@ const CountdownPage: React.FC = () => {
         }
     };
 
-    const convertNewLinesToJSX = (text: string): JSX.Element[] => {
+    const convertNewLinesToJSX = (text: string | undefined): JSX.Element[] => {
+        if (!text) {
+            return []; // Return an empty array if the text is undefined or empty
+        }
         return text.split('\n').map((line, index, array) => (
             index === array.length - 1 ? <React.Fragment key={index}>{line}</React.Fragment> : <React.Fragment key={index}>{line}<br /></React.Fragment>
         ));
     };
+
 
     const handleReportClick = async () => {
         try {
@@ -145,9 +149,10 @@ const CountdownPage: React.FC = () => {
                     <hr className="horizontal-line" />
                 </div>
                 <p>{Paragraph2}</p>
+                {name && <p><strong>{name}</strong></p>}
                 {imageUrl && <img src={imageUrl} alt="Event" className='img' />}
                 <a
-                    href={currentPerson.twitterUrl}
+                    href={twitterLink}
                     className="red-button"
                     onClick={handleReportClick}
                     target="_blank"
@@ -155,9 +160,10 @@ const CountdownPage: React.FC = () => {
                     REPORT
                 </a>
                 <ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />
+            </div>
+            <div className="footer" dir='rtl'>
                 <p>{Paragraph3}</p>
             </div>
-            <div className="footer" dir='rtl'></div>
         </div>
     );
 };
