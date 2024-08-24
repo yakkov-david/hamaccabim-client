@@ -68,7 +68,7 @@ const CountdownPage: React.FC = () => {
                 headers.set('x-api-key', config.apiKey);
             }
 
-            await fetch(config.apiUrl + 'analytics', {
+            await fetch(config.apiUrl + '/analytics', {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({
