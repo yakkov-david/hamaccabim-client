@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import CountdownPage from './hamaccabim/CountdownPage';
-import CreateEditLandingPage from './hamaccabim/CreateEditLandingPage';
 import Login from './hamaccabim/Login';
 import ForgotPassword from './hamaccabim/ForgotPassword';
 import ResetPassword from './hamaccabim/ResetPassword';
