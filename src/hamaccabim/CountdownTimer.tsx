@@ -37,11 +37,11 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft(targetDate));
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
 
-        return () => clearTimeout(timer);
+        return () => clearInterval(timer); // Cleanup the interval on component unmount
     }, [targetDate]);
 
     return (

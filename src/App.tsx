@@ -55,20 +55,6 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul className="nav-list">
-            <li>
-              <Link
-                to="/">
-                Home
-              </Link>
-              <Link
-                to="/login">
-                Admin Panel
-              </Link>
-            </li>
-          </ul>
-        </nav>
 
 
 

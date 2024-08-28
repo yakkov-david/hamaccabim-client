@@ -20,7 +20,24 @@ const CountdownPage: React.FC = () => {
     const { documentId } = useParams<{ documentId: string }>();
 
     useEffect(() => {
-        const fetchCountdownData = async () => {
+
+        // Temporary function to update page content with the desired values
+        const updatePageContent = () => {
+            setEventDate("2024-08-31T22:00:00.000+02:00");
+            setPageTitle("אתר מכבים");
+            setParagraph1(convertNewLinesToJSX("אתר מכבים הוקם על מנת שנתאגד ביחד ונתנגד לשונאי ישראל שמפיצים דברי הסתה על מדינת ישראל."));
+            setParagraph2(convertNewLinesToJSX("באתר זה נפרסם כל פעם דפים של מסיתים וביחד נכנס לדפים אלו, נתלונן על אותם אנשים ונגרום לכך שהרשתות החברתיות יחסמו להם את הדפים."));
+            setParagraph3(convertNewLinesToJSX("בואו נתאגד ונפעל למען מדינת ישראל."));
+        };
+
+        updatePageContent(); // Call the temporary function
+
+
+
+
+
+
+        /*const fetchCountdownData = async () => {
             if (documentId) {
                 try {
                     const headers = new Headers();
@@ -54,7 +71,7 @@ const CountdownPage: React.FC = () => {
                 }
             }
         };
-        fetchCountdownData();
+        fetchCountdownData();*/
     }, [documentId]);
 
     useEffect(() => {
@@ -143,15 +160,27 @@ const CountdownPage: React.FC = () => {
     return (
         <div className="countdown-page">
             <div className="header" dir="rtl">
-                <div>{pageTitle}</div>
+                <div>
+                    <h1>
+                        {pageTitle}
+                    </h1>
+                </div>
             </div>
             <div className="main-content" dir='rtl'>
-                <p className='p'>{Paragraph1}</p>
+                <p className='p'>
+                    <h2>
+                        {Paragraph1}
+                    </h2>
+                </p>
                 <div dir='ltr'>
                     <CountdownTimer targetDate={new Date(eventDate)} />
                     <hr className="horizontal-line" />
                 </div>
-                <p>{Paragraph2}</p>
+                <p>
+                    <h2>
+                        {Paragraph2}
+                    </h2>
+                </p>
                 {name && <p><strong>{name}</strong></p>}
                 {imageUrl && <img src={imageUrl} alt="Event" className='img' />}
                 <a
@@ -166,7 +195,11 @@ const CountdownPage: React.FC = () => {
                 <ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />
             </div>
             <div className="footer" dir='rtl'>
-                <p>{Paragraph3}</p>
+                <p>
+                    <h2>
+                        {Paragraph3}
+                    </h2>
+                </p>
             </div>
         </div>
     );
