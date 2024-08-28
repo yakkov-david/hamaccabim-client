@@ -27,6 +27,7 @@ const CountdownPage: React.FC = () => {
                     headers.set('Content-Type', 'application/json');
                     if (config.apiKey) {
                         headers.set('x-api-key', config.apiKey);
+                        headers.set('Access-Control-Allow-Origin', '*')
                     }
 
                     const response = await fetch(config.apiUrl + `/landing-pages/${documentId}`, {
@@ -66,6 +67,7 @@ const CountdownPage: React.FC = () => {
             headers.set('Content-Type', 'application/json');
             if (config.apiKey) {
                 headers.set('x-api-key', config.apiKey);
+                headers.set('Access-Control-Allow-Origin', '*')
             }
 
             await fetch(config.apiUrl + '/analytics', {
