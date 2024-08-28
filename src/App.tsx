@@ -67,16 +67,9 @@ const App: React.FC = () => {
             path="/countdown/:documentId"
             element={<CountdownPage />}
           />
+
           <Route
             path="/admin"
-            element={
-
-              <CreateEditLandingPage />
-
-            }
-          />
-          <Route
-            path="/login"
             element={<Login />}
           />
           <Route
