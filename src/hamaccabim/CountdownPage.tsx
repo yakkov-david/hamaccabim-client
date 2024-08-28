@@ -8,12 +8,12 @@ import { useParams } from 'react-router-dom';
 const CountdownPage: React.FC = () => {
     const [eventDate, setEventDate] = useState("");
     const [pageTitle, setPageTitle] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    //const [imageUrl, setImageUrl] = useState("");
     const [Paragraph1, setParagraph1] = useState<JSX.Element[]>([]);
     const [Paragraph2, setParagraph2] = useState<JSX.Element[]>([]);
     const [Paragraph3, setParagraph3] = useState<JSX.Element[]>([]);
-    const [name, setName] = useState(""); // New state for name
-    const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
+    //const [name, setName] = useState(""); // New state for name
+    //const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -181,10 +181,10 @@ const CountdownPage: React.FC = () => {
                         {Paragraph2}
                     </h2>
                 </p>
-                {name && <p><strong>{name}</strong></p>}
-                {imageUrl && <img src={imageUrl} alt="Event" className='img' />}
+                {/*{name && <p><strong>{name}</strong></p>}*/}
+                {/*{imageUrl && <img src={imageUrl} alt="Event" className='img' />}*/}
                 <a
-                    href={twitterLink}
+                    //href={twitterLink}
                     className="red-button"
                     onClick={handleReportClick}
                     target="_blank"

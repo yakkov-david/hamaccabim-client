@@ -10,7 +10,7 @@ import AdminWelcome from './hamaccabim/AdminWelcome';
 import UsersTable from './hamaccabim/UsersTable';
 import LandingPagesTable from './hamaccabim/LandingPagesTable';
 import { Navigate } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route/*, Link */} from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 
