@@ -13,7 +13,7 @@ const CountdownPage: React.FC = () => {
     const [Paragraph2, setParagraph2] = useState<JSX.Element[]>([]);
     const [Paragraph3, setParagraph3] = useState<JSX.Element[]>([]);
     //const [name, setName] = useState(""); // New state for name
-    //const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
+    const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -28,6 +28,7 @@ const CountdownPage: React.FC = () => {
             setParagraph1(convertNewLinesToJSX("אתר מכבים הוקם על מנת שנתאגד ביחד ונתנגד לשונאי ישראל שמפיצים דברי הסתה על מדינת ישראל."));
             setParagraph2(convertNewLinesToJSX("באתר זה נפרסם כל פעם דפים של מסיתים וביחד נכנס לדפים אלו, נתלונן על אותם אנשים ונגרום לכך שהרשתות החברתיות יחסמו להם את הדפים."));
             setParagraph3(convertNewLinesToJSX("בואו נתאגד ונפעל למען מדינת ישראל."));
+            setTwitterLink("https://twitter.com/jacksonhinklle");
         };
 
         updatePageContent(); // Call the temporary function
@@ -184,7 +185,7 @@ const CountdownPage: React.FC = () => {
                 {/*{name && <p><strong>{name}</strong></p>}*/}
                 {/*{imageUrl && <img src={imageUrl} alt="Event" className='img' />}*/}
                 <a
-                    //href={twitterLink}
+                    href={twitterLink}
                     className="red-button"
                     onClick={handleReportClick}
                     target="_blank"
