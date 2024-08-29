@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import config from '../config';
 //import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
-import ResponseDialog from './ResponseDialog';
+//import ResponseDialog from './ResponseDialog';
 import { useParams } from 'react-router-dom';
 
 const CountdownPage: React.FC = () => {
@@ -15,7 +15,7 @@ const CountdownPage: React.FC = () => {
     //const [name, setName] = useState(""); // New state for name
     //const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
 
-    const [dialogOpen, setDialogOpen] = useState(false);
+    //const [dialogOpen, setDialogOpen] = useState(false);
 
     const { documentId } = useParams<{ documentId: string }>();
 
