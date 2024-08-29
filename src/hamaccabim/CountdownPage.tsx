@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import config from '../config';
-import CountdownTimer from './CountdownTimer';
+//import CountdownTimer from './CountdownTimer';
 import './CountdownLayout.css';
 import ResponseDialog from './ResponseDialog';
 import { useParams } from 'react-router-dom';
 
 const CountdownPage: React.FC = () => {
-    const [eventDate, setEventDate] = useState("");
+    //const [eventDate, setEventDate] = useState("");
     const [pageTitle, setPageTitle] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [Paragraph1, setParagraph1] = useState<JSX.Element[]>([]);
     const [Paragraph2, setParagraph2] = useState<JSX.Element[]>([]);
     const [Paragraph3, setParagraph3] = useState<JSX.Element[]>([]);
     //const [name, setName] = useState(""); // New state for name
-    const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
+    //const [twitterLink, setTwitterLink] = useState(""); // New state for Twitter link
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -23,12 +23,12 @@ const CountdownPage: React.FC = () => {
 
         // Temporary function to update page content with the desired values
         const updatePageContent = () => {
-            setEventDate("2024-08-31T22:00:00.000+02:00");
+            //setEventDate("2024-08-31T22:00:00.000+02:00");
             setPageTitle("אתר המכבים");
             setParagraph1(convertNewLinesToJSX("אתר מכבים הוקם על מנת שנתאגד ביחד ונתנגד לשונאי ישראל שמפיצים דברי הסתה על מדינת ישראל."));
             setParagraph2(convertNewLinesToJSX("באתר זה נפרסם כל פעם דפים של מסיתים וביחד נכנס לדפים אלו, נתלונן על אותם אנשים ונגרום לכך שהרשתות החברתיות יחסמו להם את הדפים."));
             setParagraph3(convertNewLinesToJSX("בואו נתאגד ונפעל למען מדינת ישראל."));
-            setTwitterLink("https://twitter.com/jacksonhinklle");
+            //setTwitterLink("https://twitter.com/jacksonhinklle");
             setImageUrl("./images/hamaccabim-image.jpeg")
         };
 
@@ -112,7 +112,7 @@ const CountdownPage: React.FC = () => {
     };
 
 
-    const handleReportClick = async () => {
+    /*const handleReportClick = async () => {
         try {
             const headers = new Headers();
             headers.set('Content-Type', 'application/json');
@@ -157,7 +157,7 @@ const CountdownPage: React.FC = () => {
 
     const handleCloseDialog = () => {
         setDialogOpen(false);
-    };
+    };*/
 
     return (
         <div className="countdown-page">
@@ -191,7 +191,7 @@ const CountdownPage: React.FC = () => {
                 >
                     REPORT
                 </a>*/}
-                <ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />
+                {/*<ResponseDialog open={dialogOpen} onClose={handleCloseDialog} />*/}
             </div>
             <div className="footer" dir='rtl'>
                 <p>
