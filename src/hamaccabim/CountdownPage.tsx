@@ -174,7 +174,7 @@ const CountdownPage: React.FC = () => {
                         {Paragraph1}
                     </h2>
                 </p>
-                {imageUrl && <img src={imageUrl} alt="Event" width={800} height={200}className='img' />}
+                {imageUrl && <img src={imageUrl} alt="Event" width={450} height={200}className='img' />}
                 <p>
                     <h2>
                         {Paragraph2}
