@@ -24,7 +24,7 @@ const CountdownPage: React.FC = () => {
         // Temporary function to update page content with the desired values
         const updatePageContent = () => {
             setEventDate("2024-08-31T22:00:00.000+02:00");
-            setPageTitle("אתר מכבים");
+            setPageTitle("אתר המכבים");
             setParagraph1(convertNewLinesToJSX("אתר מכבים הוקם על מנת שנתאגד ביחד ונתנגד לשונאי ישראל שמפיצים דברי הסתה על מדינת ישראל."));
             setParagraph2(convertNewLinesToJSX("באתר זה נפרסם כל פעם דפים של מסיתים וביחד נכנס לדפים אלו, נתלונן על אותם אנשים ונגרום לכך שהרשתות החברתיות יחסמו להם את הדפים."));
             setParagraph3(convertNewLinesToJSX("בואו נתאגד ונפעל למען מדינת ישראל."));
