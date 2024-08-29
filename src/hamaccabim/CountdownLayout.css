@@ -19,14 +19,15 @@
 
 /* Style for the image */
 .img {
-  max-width: 50%; /* Reducing maximum width to 50% of its container */
-  width: 150px; /* Sets a fixed width; adjust as necessary */
-  height: auto; /* Height is set to auto to maintain aspect ratio */
-  display: block; /* Makes the image a block element */
-  margin: 10px; /* Centers the image horizontally in its container */
-  padding: 8px; /* This will create space between the image and the border */
-  border-radius: 85px; /* Half the width and height to make it a circle */
-  border: 1px solid red; /* Adjust the color and width of the border as desired */
+  mix-blend-mode: lighten;
+  /*max-width: 50%; /* Reducing maximum width to 50% of its container */
+  /*width: 150px; /* Sets a fixed width; adjust as necessary */
+  /*height: auto; /* Height is set to auto to maintain aspect ratio */
+  /*display: block; /* Makes the image a block element */
+  /*margin: 10px; /* Centers the image horizontally in its container */
+  /*padding: 8px; /* This will create space between the image and the border */
+  /*border-radius: 85px; /* Half the width and height to make it a circle */
+  /*border: 1px solid red; /* Adjust the color and width of the border as desired */
 }
 
 .p {
