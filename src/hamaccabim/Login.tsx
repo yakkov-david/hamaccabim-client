@@ -19,7 +19,7 @@ const Login: React.FC = () => {
     else if (token) {
       navigate('/AdminWelcome')
     }
-  }, []);
+  }, [navigate]);
 
 
 
