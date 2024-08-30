@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import config from '../config';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
@@ -8,6 +8,21 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
+  // Check if a token exists in local storage and redirect
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/admin');
+    }
+    else if (token) {
+      navigate('/AdminWelcome')
+    }
+  }, []);
+
+
+
 
   const handleSubmit = async () => {
     // Send the credentials to the server

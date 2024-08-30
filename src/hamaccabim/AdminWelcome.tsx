@@ -9,8 +9,16 @@ const AdminWelcome: React.FC = () => {
         navigate(path);
     };
 
+    const handleLogout = () => {
+        // Remove the token from localStorage
+        localStorage.removeItem('token');
+        // Redirect to the login page
+        navigate('/Admin');
+    };
+
     return (
         <div className="admin-welcome">
+            <button onClick={handleLogout} className="logout-button">Logout</button>
             <h1>Welcome, Manager</h1>
             <div className="button-container">
                 <button onClick={() => handleNavigation('/AnalyticsPage')} className="nav-button">Analytics Page</button>

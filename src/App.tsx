@@ -8,6 +8,7 @@ import AnalyticsPage from './hamaccabim/AnalyticsPage';
 import AdminWelcome from './hamaccabim/AdminWelcome';
 import UsersTable from './hamaccabim/UsersTable';
 import LandingPagesTable from './hamaccabim/LandingPagesTable';
+import PreviewCountdown from './hamaccabim/Preview-countdown';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route/*, Link */} from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -60,7 +61,8 @@ const App: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            element={<CountdownPage />}
+            
+            element={<PreviewCountdown />}
           />
           <Route
             path="/countdown/:documentId"
