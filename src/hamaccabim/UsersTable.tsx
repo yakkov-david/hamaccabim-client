@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridRowParams } from '@mui/x-data-grid';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Fab, IconButton, InputAdornment } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import config from '../config';

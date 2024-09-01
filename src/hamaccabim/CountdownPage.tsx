@@ -66,7 +66,31 @@ const CountdownPage: React.FC = () => {
     }, [documentId]);
 
     useEffect(() => {
+        /*reportVisit();*/
+        const reportVisit = async () => {
+            try {
+                const headers = new Headers();
+                headers.set('Content-Type', 'application/json');
+                if (config.apiKey) {
+                    headers.set('x-api-key', config.apiKey);
+                    headers.set('Access-Control-Allow-Origin', '*')
+                }
+
+                await fetch(config.apiUrl + '/analytics', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        event: 'visit',
+                        landingPageId: documentId,
+                        timestamp: new Date().toISOString(),
+                    })
+                });
+            } catch (error) {
+                console.error('Error reporting visit:', error);
+            }
+        };
         reportVisit();
+
     }, []);
 
     const reportVisit = async () => {

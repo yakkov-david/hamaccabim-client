@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridRowParams } from '@mui/x-data-grid';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
 import './LandingPagesTable.css';
