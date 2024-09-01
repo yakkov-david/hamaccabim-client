@@ -91,9 +91,9 @@ const CountdownPage: React.FC = () => {
         };
         reportVisit();
 
-    }, []);
+    }, [documentId]);
 
-    const reportVisit = async () => {
+    /*const reportVisit = async () => {
         try {
             const headers = new Headers();
             headers.set('Content-Type', 'application/json');
@@ -114,7 +114,7 @@ const CountdownPage: React.FC = () => {
         } catch (error) {
             console.error('Error reporting visit:', error);
         }
-    };
+    };*/
 
     const convertNewLinesToJSX = (text: string | undefined): JSX.Element[] => {
         if (!text) {
