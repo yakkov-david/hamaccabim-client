@@ -83,6 +83,7 @@ const CountdownPage: React.FC = () => {
                 headers: headers,
                 body: JSON.stringify({
                     event: 'visit',
+                    landingPageId: documentId,
                     timestamp: new Date().toISOString(),
                 })
             });
@@ -133,6 +134,7 @@ const CountdownPage: React.FC = () => {
                 headers: headers,
                 body: JSON.stringify({
                     event: 'click',
+                    landingPageId: documentId,
                     timestamp: new Date().toISOString()
                 })
             });

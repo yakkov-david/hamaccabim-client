@@ -10,7 +10,7 @@ import UsersTable from './hamaccabim/UsersTable';
 import LandingPagesTable from './hamaccabim/LandingPagesTable';
 import PreviewCountdown from './hamaccabim/Preview-countdown';
 import { Navigate } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route/*, Link */} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route/*, Link */ } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -47,7 +47,7 @@ interface GuardedRouteProps {
 
 const GuardedRoute: React.FC<GuardedRouteProps> = ({ children, validate }) => {
   const isAuthValid = validate ? validate() : isAuthenticated();
-  return isAuthValid ? <>{children}</> : <Navigate to="/login" />;
+  return isAuthValid ? <>{children}</> : <Navigate to="/admin" />;
 };
 
 
@@ -61,7 +61,7 @@ const App: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            
+
             element={<PreviewCountdown />}
           />
           <Route
@@ -114,6 +114,15 @@ const App: React.FC = () => {
             element={
               <GuardedRoute>
                 <LandingPagesTable />
+              </GuardedRoute>
+            }
+          />
+
+          <Route
+            path="/analytics/:landingPageId"
+            element={
+              <GuardedRoute>
+                <AnalyticsPage />
               </GuardedRoute>
             }
           />

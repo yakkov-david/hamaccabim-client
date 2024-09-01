@@ -2,11 +2,11 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridRowParams } from '@mui/x-data-grid';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
 import './LandingPagesTable.css';
 
-// Define an interface that matches the structure of your data
 interface LandingPages {
     _id: { $oid: string } | string;
     CountdownDate: string;
@@ -62,12 +62,12 @@ export default function LandingPagesTable() {
     }, []);
 
     const columns: GridColDef[] = [
-        { field: 'CountdownDate', headerName: 'Launch Date & Time', width: 200 },
+        { field: 'CountdownDate', headerName: 'Date', width: 100 },
         { field: 'title', headerName: 'Title', width: 150 },
         {
             field: 'paragraph1',
             headerName: 'Introduction',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
             ),
@@ -75,7 +75,7 @@ export default function LandingPagesTable() {
         {
             field: 'paragraph2',
             headerName: 'Details',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
             ),
@@ -83,12 +83,12 @@ export default function LandingPagesTable() {
         {
             field: 'name',
             headerName: 'Name',
-            width: 150,
+            width: 120,
         },
         {
             field: 'twitterLink',
             headerName: 'Twitter Link',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 <a href={params.value} target="_blank" rel="noopener noreferrer">
                     {params.value}
@@ -98,7 +98,7 @@ export default function LandingPagesTable() {
         {
             field: 'paragraph3',
             headerName: 'Additional Info',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value ? params.value.replace(/\n/g, '<br>') : '' }} />
             ),
@@ -106,7 +106,7 @@ export default function LandingPagesTable() {
         {
             field: 'ImageUrl',
             headerName: 'Image',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 params.value ? <img src={params.value} alt="Selected" style={{ width: '100%', height: 'auto' }} /> : null
             ),
@@ -114,17 +114,34 @@ export default function LandingPagesTable() {
         {
             field: 'viewPage',
             headerName: 'View Page',
-            width: 150,
+            width: 120,
             renderCell: (params) => (
                 <Button
                     variant="contained"
                     color="primary"
                     onClick={() => {
                         const id = typeof params.row._id === 'object' ? params.row._id.$oid : params.row._id;
-                        navigate(`/countdown/${id}`);
+                        window.open(`/countdown/${id}`, '_blank');
                     }}
                 >
                     View
+                </Button>
+            ),
+        },
+        {
+            field: 'viewAnalytics',
+            headerName: 'View Analytics',
+            width: 170,
+            renderCell: (params) => (
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                        const id = typeof params.row._id === 'object' ? params.row._id.$oid : params.row._id;
+                        navigate(`/analytics/${id}`);
+                    }}
+                >
+                    View Analytics
                 </Button>
             ),
         },
@@ -282,6 +299,18 @@ export default function LandingPagesTable() {
 
     return (
         <div className="dataTableContainer">
+            <Typography
+                variant="h4"
+                sx={{
+                    fontWeight: 'bold',
+                    marginBottom: '20px',
+                    marginTop: '40px', // Moves title away from the top
+                    textAlign: 'center',
+                    color: '#3f51b5', // Beautiful blue color
+                }}
+            >
+                Landing Pages Table
+            </Typography>
             <div className="dataGridWrapper">
                 <DataGrid
                     rows={rows}

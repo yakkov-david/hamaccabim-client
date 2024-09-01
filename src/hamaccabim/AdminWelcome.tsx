@@ -21,7 +21,7 @@ const AdminWelcome: React.FC = () => {
             <button onClick={handleLogout} className="logout-button">Logout</button>
             <h1>Welcome, Manager</h1>
             <div className="button-container">
-                <button onClick={() => handleNavigation('/AnalyticsPage')} className="nav-button">Analytics Page</button>
+                {/*<button onClick={() => handleNavigation('/AnalyticsPage')} className="nav-button">Analytics Page</button>*/}
                 <button onClick={() => handleNavigation('/UsersTable')} className="nav-button">Managers table</button>
                 <button onClick={() => handleNavigation('/LandingPagesTable')} className="nav-button">Landing Pages table</button>
             </div>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridRowParams } from '@mui/x-data-grid';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Fab, IconButton, InputAdornment } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Typography, Box } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import config from '../config';
@@ -221,6 +222,18 @@ export default function UsersTable() {
 
     return (
         <div className="dataTableContainer">
+            <Typography
+                variant="h4"
+                sx={{
+                    fontWeight: 'bold',
+                    marginBottom: '20px',
+                    marginTop: '40px', // Moves title away from the top
+                    textAlign: 'center',
+                    color: '#3f51b5', // Beautiful blue color
+                }}
+            >
+                Managers Table
+            </Typography>
             <div className="dataGridWrapper">
                 <DataGrid
                     rows={rows}

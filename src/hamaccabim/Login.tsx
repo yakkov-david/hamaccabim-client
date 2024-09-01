@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import config from '../config';
 import { useNavigate, Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+
 import './Login.css';
+
+
+
+interface DecodedToken {
+  exp: number;
+}
+
+
+
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -9,20 +20,17 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   // Check if a token exists in local storage and redirect
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/admin');
-    }
-    else if (token) {
-      navigate('/AdminWelcome')
+    if (token) {
+
+      const { exp } = jwtDecode<DecodedToken>(token);
+      if (Date.now() <= exp * 1000) {
+        navigate('/AdminWelcome');
+      }
     }
   }, [navigate]);
-
-
-
 
   const handleSubmit = async () => {
     // Send the credentials to the server
